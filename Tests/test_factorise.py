@@ -2,6 +2,7 @@ from utils.q_e_factors import factorise
 
 
 def test_factorise():
+
     assert factorise('x^2+2x+1') == ['x^2', '2x', '1']
 
 
