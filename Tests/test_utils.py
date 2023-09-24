@@ -1,25 +1,33 @@
-from utils.miles_to_kilometers import to_kilometers
+"""Module for performing unit testing of the Metric Convertions."""
 from math import ceil
+from pytest import raises, fixture
+from utils.metric_conversion import DistanceConversion
 
 
-def test1():
-    '''
-    Simple first test
-    '''
-    assert ceil(to_kilometers(100)) == 161
+class TestUtils:
+    """Class for unit testing the Utils module."""
+    @fixture
+    def dis_converter(self):
+        """Function for creating a converter object for every unit test.
 
+        Returns:
+            object: DistanceConversion class's object.
+        """
 
-def test2():
-    assert to_kilometers(1) == 1.60934
+        self.dis_converter = DistanceConversion()
+        return self.dis_converter
 
+    def test_to_kilometers(self, dis_converter) -> None:
+        """Test for converting miles to kilometers."""
+        assert ceil(dis_converter.to_kilometers(100)) == 161
+        assert dis_converter.to_kilometers(1) == 1.60934
+        assert dis_converter.to_kilometers(2) == 1.60934*2
+        assert dis_converter.to_kilometers(10) == 16.0934
+        with raises(ValueError):
+            assert dis_converter.to_kilometers('asdsad')
+        assert dis_converter.to_kilometers(1) == 1.60934
+        assert dis_converter.to_kilometers(102.3) == 164.635482
 
-def test3():
-    assert to_kilometers(2) == 1.60934*2
-
-
-def test4():
-    assert to_kilometers(10) == 16.0934
-
-
-def test5():
-    assert to_kilometers(10*10) == (1.60934)*100
+    def test_to_miles(self, dis_converter) -> None:
+        """Test for converting kilometers to miles."""
+        assert dis_converter.to_miles(1) == 1/1.60934

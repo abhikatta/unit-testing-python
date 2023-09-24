@@ -11,7 +11,11 @@ class TestExpressionFactoriser:
     Class for unit testing the Polynomial Expression Factoriser class.
     '''
     @pytest.fixture
-    def facto(self):
+    def facto(self) -> ExpressionFactoriser:
+        """Create and return an object of class ExpressionFactoriser.
+        Returns:
+            object: An object of class ExpressionFactoriser.
+        """
         self.facto = ExpressionFactoriser()
         return self.facto
 
