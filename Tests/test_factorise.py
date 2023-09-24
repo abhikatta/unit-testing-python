@@ -1,10 +1,25 @@
-from utils.q_e_factors import factorise
+
+'''
+Test module for Expression Factoriser
+'''
+import pytest
+from utils.polynomial_expression_factoriser import ExpressionFactoriser
 
 
-def test_factorise():
+class TestExpressionFactoriser:
+    '''
+    Class for unit testing the Polynomial Expression Factoriser class.
+    '''
+    @pytest.fixture
+    def facto(self):
+        self.facto = ExpressionFactoriser()
+        return self.facto
 
-    assert factorise('x^2+2x+1') == ['x^2', '2x', '1']
+    def test_factorise(self, facto):
+        '''Test 1 for splitting terms in polynomial expression.'''
+        assert facto.factorise(expression="x^2+2x+1") == ['x^2', '2x', '1']
 
-
-def test_factorise2():
-    assert factorise('x^3+2x^2+9x+12') == ['x^3', '2x^2', '9x', '12']
+    def test_factorise2(self, facto):
+        '''Test 2 for splitting terms in polynomial expression.'''
+        assert facto.factorise(
+            expression='x^3+2x^2+9x+12') == ['x^3', '2x^2', '9x', '12']
